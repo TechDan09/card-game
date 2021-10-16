@@ -1,0 +1,182 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+* {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: url('../assets/background.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0;
+}
+
+#main-area {
+  min-height: 100vh;
+}
+
+.profile-bar {
+  background: #fe64a3;
+}
+
+.profile-img {
+  height: 100px;
+}
+
+.profile-name {
+  font-size: 1.2rem;
+}
+
+#player2-bar {
+  position: relative;
+  width: 100;
+  right: 0px;
+}
+
+.player1-box,
+.player2-box {
+  background: rgba(255, 255, 255, 0.3);
+  border: 1px solid #f6839c;
+  height: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+#battleground {
+  height: 50vh;
+  flex-basis: 50vh;
+}
+
+.card {
+  width: 120px;
+  height: 120px;
+  border-radius: 10px;
+  position: relative;
+  margin: 10px auto;
+  cursor: move;
+  /* height: 20px; */
+}
+
+.card img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  object-position: top;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.card p {
+  position: absolute;
+  font-size: 0.9em;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  color: white;
+  border-radius: 50%;
+}
+
+#attack {
+  background: rgb(104, 0, 21);
+  top: 0;
+  left: 0;
+}
+
+#defence {
+  background: rgb(10, 102, 1);
+  top: 0;
+  right: 0;
+}
+
+#cost {
+  background: rgb(3, 24, 216);
+  bottom: 0;
+  left: 0;
+}
+
+#name {
+  position: absolute;
+  font-size: 0.9rem;
+  text-align: center;
+  padding: 0px 10px;
+  bottom: 0;
+  right: 0;
+}
+
+.card.over {
+  border: 3px dotted #666;
+}
+
+[draggable] {
+  user-select: none;
+}
+
+.drop-zone {
+  background: rgba(255, 255, 255, 0.3);
+  border: 1px solid #f6839c;
+  width: 130px;
+  height: 130px;
+  margin: 10px auto;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.card:hover {
+  animation: pulse 1s infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.submit-btn {
+  width: 100%;
+}
+
+#message {
+  font-size: 0.7em;
+}
+
+#alert {
+  display: none;
+}
+
+.welcome-banner {
+  background-color: white;
+  text-align: center;
+  padding: 10px;
+  margin: 10px;
+  min-height: 30vh;
+  border-radius: 15px;
+}
+
+.welcome-banner .btn {
+  margin: 10px 0px;
+}
+
+.welcome-banner p {
+  font-size: 1.3em;
+  text-transform: capitalize;
+}

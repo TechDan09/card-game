@@ -1,0 +1,7 @@
+{
+  "host": "localhost",
+  "user": "donoriukp",
+  "password": "securepass",
+  "database": "game",
+  "secret": "securepass"
+}

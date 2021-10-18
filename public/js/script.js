@@ -20,21 +20,21 @@ socket.on('message', (msg) => {
 function handleBoxDrop(e) {
   const id = e.dataTransfer.getData('text');
   // const draggableElement = document.getElementById(id);
-  let dropzone = e.target;
-  // console.log(draggableElement.outerHTML);
-  socket.emit('drop', id);
+  let dropzoneId = e.target.id;
+  console.log(dropzoneId);
+  socket.emit('drop', id, dropzoneId);
   // console.log(dropZone);
   // dropzone.appendChild(draggableElement);
-
-  socket.on('drop', (id) => {
-    console.log('todrop: ' + id);
-    let temp = document.getElementById(id);
-    console.log(e.target);
-    e.target.appendChild(temp);
-  });
-
   e.dataTransfer.clearData();
 }
+
+socket.on('drop', (id, dropzoneId) => {
+  console.log('todrop: ' + id);
+  console.log(dropzoneId);
+  let droppable = document.getElementById(id);
+  let dropzone = document.getElementById(dropzoneId);
+  dropzone.appendChild(droppable);
+});
 
 document.addEventListener('DOMContentLoaded', (event) => {
   let dropZoneBox = document.querySelectorAll('.drop-zone');

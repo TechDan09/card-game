@@ -1,7 +1,9 @@
 const User = require('../models/user');
 const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
+// const Hero = require('../models/hero');
 
+// const hero = new Hero();
 const user = new User();
 
 //register controller
@@ -47,7 +49,7 @@ exports.login = (req, res) => {
       req.session.isAuth = true;
       req.session.name = username;
 
-      res.status(200).send({ message: 'Registered Successfully' });
+      res.status(200).send({ message: 'Login Successful' });
     })
     .catch((err) => {
       res.status(500).send({ message: err.message });

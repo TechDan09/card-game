@@ -14,6 +14,8 @@ const parsed = JSON.parse(config);
 const mysql = require('mysql2/promise');
 var MySQLStore = require('express-mysql-session')(session);
 const connection = mysql.createPool(parsed);
+const Hero = require('./models/hero');
+const hero = new Hero();
 const sessionStore = new MySQLStore(
   {
     expiration: 10800000,
@@ -48,17 +50,62 @@ app.use(router);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+let players = 0;
+
+function generateRoomId() {
+  return Math.random().toString(36).substring(2, 13);
+}
+
 io.on('connection', (socket) => {
+  players++;
   console.log('a user connected');
+  console.log(`Players on server ${players}`);
 
-  socket.emit('message', 'You are connected');
+  if (players % 2 !== 0) {
+    socket.emit('message', 'You are player 1');
+  } else {
+    socket.emit('message', 'You are player 2');
+  }
 
-  socket.on('drop', (id, dropzoneId) => {
-    io.emit('drop', id, dropzoneId);
+  socket.join(Math.round(players / 2));
+  socket.emit('room-no', Math.round(players / 2));
+
+  // socket.on('createRoom', () => {
+  //   let roomId = generateRoomId();
+  //   socket.join(roomId);
+  //   // socket.room = roomId;
+  //   console.log(socket.rooms);
+  //   socket.emit('getRoomId', roomId);
+  // });
+
+  // socket.on('joinRoom', (roomId) => {
+  //   socket.join(roomId);
+  //   console.log(socket.rooms);
+  //   socket.emit('joinRoom', roomId);
+  // });
+
+  socket.on('getCardsPlayer1', (selectedCards, clientRoom) => {
+    io.to(clientRoom).emit('getCardsPlayer1', selectedCards);
+  });
+
+  socket.on('getCardsPlayer2', (selectedCards, clientRoom) => {
+    io.to(clientRoom).emit('getCardsPlayer2', selectedCards);
+  });
+
+  socket.on('winner', (msg, clientRoom) => {
+    console.log(msg);
+    io.to(clientRoom).emit('winner', msg);
+  });
+
+  socket.on('drop', (id, dropzoneId, clientRoom) => {
+    console.log(clientRoom);
+    io.to(clientRoom).emit('drop', id, dropzoneId);
   });
 
   socket.on('disconnect', function () {
+    players--;
     console.log('A player disconnected');
+    console.log(`Players on server ${players}`);
   });
 });
 

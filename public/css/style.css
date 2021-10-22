@@ -178,5 +178,16 @@ h6 {
 
 .welcome-banner p {
   font-size: 1.3em;
-  text-transform: capitalize;
+}
+
+.display-none {
+  display: none;
+}
+
+#result-box {
+  min-height: 100px;
+  width: 70%;
+  background-color: white;
+  margin: 10px auto;
+  border-radius: 5px;
 }

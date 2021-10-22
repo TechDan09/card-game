@@ -2,7 +2,8 @@ const express = require('express');
 const { isAuth } = require('../middlewares/isAuth');
 const { redirectHome } = require('../middlewares/redirectHome');
 const { validateUsernameOrEmail } = require('../middlewares/validateRegister');
-const controller = require('../controllers/user.controller');
+const userController = require('../controllers/user.controller');
+const heroController = require('../controllers/hero.controller');
 const router = express.Router();
 
 router.use(function timeLog(req, res, next) {
@@ -22,12 +23,10 @@ router.get('/register', redirectHome, (req, res) => {
   res.render('register');
 });
 
-router.get('/game', (req, res) => {
-  res.render('game', { name: req.session.name });
-});
+router.post('/register', validateUsernameOrEmail, userController.register);
 
-router.post('/register', validateUsernameOrEmail, controller.register);
+router.post('/login', redirectHome, userController.login);
 
-router.post('/login', redirectHome, controller.login);
+router.get('/get-heroes', heroController.getHeroes);
 
 module.exports = router;

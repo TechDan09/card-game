@@ -15,31 +15,56 @@
   </head>
   <body>
     <div class="container">
-      <div class="row justify-content-center align-content-center my-4">
-        <div class="col-5">
-          <div class="welcome-banner my-auto">
-            <p>Welcome <%= name %></p>
-            <a class="btn btn-danger px-4" href="/game">CREATE A GAME</a>
-            <p>OR</p>
-            <form action="/join-game" method="post">
-              <input
-                type="text"
-                name="code"
-                id="code"
-                placeholder="Enter Game Code"
-                class="form-control"
-              />
-              <input
-                type="submit"
-                value="JOIN GAME"
-                class="btn btn-danger px-4"
-              />
-            </form>
+      <div class="row">
+        <div class="col-2">
+          <div class="player1-box" id="player1-box"></div>
+        </div>
+        <div class="col-8" id="main-area">
+          <div class="row flex-column h-100">
+            <div class="col profile-bar text-center p-3" id="player1-bar">
+              <img src="./assets/avatar.png" class="profile-img" />
+              <p class="profile-name">Player 1</p>
+              <a id="get-player1-cards" class="btn btn-success"
+                >Add Cards For Player 1</a
+              >
+            </div>
+            <div class="col m-3" id="battleground">
+              <div class="row justify-content-between align-items-center">
+                <div class="col-3">
+                  <div class="drop-zone" id="zone1"></div>
+                  <div class="drop-zone" id="zone2"></div>
+                </div>
+
+                <div class="col text-center">
+                  <button class="btn btn-danger" id="fight">FIGHT</button>
+                  <div id="result-box" class="p-3">
+                    <h4 id="result"></h4>
+                  </div>
+                </div>
+
+                <div class="col-3">
+                  <div class="drop-zone" id="zone3"></div>
+                  <div class="drop-zone" id="zone4"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col profile-bar text-center p-3" id="player2-bar">
+              <img src="./assets/avatar2.png" class="profile-img" />
+              <p class="profile-name">Player 2</p>
+              <a id="get-player2-cards" class="btn btn-success"
+                >Add Cards For Player 2</a
+              >
+            </div>
           </div>
+        </div>
+        <div class="col-2">
+          <div class="player2-box" id="player2-box"></div>
         </div>
       </div>
     </div>
     <script src="/socket.io/socket.io.js"></script>
     <script src="js/script.js"></script>
+    <script src="js/fight.js"></script>
+    <script src="js/ui.js"></script>
   </body>
 </html>

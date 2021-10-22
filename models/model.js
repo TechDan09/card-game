@@ -5,6 +5,17 @@ class Model {
     this.table = table;
   }
 
+  async findAll() {
+    let query = `SELECT * FROM ${this.table};`;
+    let result, _;
+    try {
+      [result, _] = await sql.execute(query);
+    } catch (error) {
+      console.log(`Error on saving to db: ${error}`);
+    }
+    return result;
+  }
+
   async save(obj) {
     let columns = []; //represents column of the table
     let values = []; //represents the values for each column
